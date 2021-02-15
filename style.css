@@ -14,7 +14,7 @@ html {
     font-size: 62.5%;
 }
 
-/* Homepaget settings */
+/* Homepage settings */
 
 body {
     font-family: monospace;
@@ -50,5 +50,15 @@ body {
 
 #start-button:hover {
     background-color: var(--green);
+}
+
+/* Timer */
+
+.time-left {
+    position: fixed;
+    top: 5%;
+    left: 85%;
+    color: var(--yellow);
+    
 }
 
