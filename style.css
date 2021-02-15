@@ -1,0 +1,54 @@
+:root {
+    --darkgreen: #2F4F4F;
+    --blue: #00FFFF;
+    --green: #66CDAA;
+    --purple: #9370DB;
+    --pink: #FFB6C1;
+    --yellow: #FFF8DC;
+    --red: #F08080;
+}
+
+/* To make rem defaults easier to measure */
+
+html {
+    font-size: 62.5%;
+}
+
+/* Homepaget settings */
+
+body {
+    font-family: monospace;
+    background-color: var(--darkgreen);
+    font-size: 3rem;
+    border: 5px solid var(--yellow);
+    
+}
+
+#quiz-heading {
+    text-align: center;
+    margin-top: 15%;
+}
+
+#quiz-heading h1 {
+    font-size: 5rem;
+    color: var(--blue);
+    line-height: 1.25;
+}
+
+#quiz-heading p {
+    color: var(--yellow);
+    margin-top: 7rem;
+}
+
+#start-button {
+    padding: 1.5rem;
+    margin-top: 10rem;
+    background-color: var(--pink);
+    border: 3px solid black;
+    border-radius: 2rem;
+}
+
+#start-button:hover {
+    background-color: var(--green);
+}
+
