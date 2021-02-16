@@ -21,7 +21,12 @@ body {
     background-color: var(--darkgreen);
     font-size: 3rem;
     border: 5px solid var(--yellow);
-    
+    padding: 5rem;
+}
+
+#home-content {
+    display: flex;
+    justify-content: center;
 }
 
 #quiz-heading {
@@ -62,3 +67,58 @@ body {
     
 }
 
+/* Questions styling */
+
+#questions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#question-text {
+    font-size: 4rem;
+    color: var(--blue);
+    line-height: 1.25;
+    text-align: center;
+    margin-top: 10%;
+    margin-left: 5rem;
+    margin-right: 5rem;
+
+}
+
+#answer-buttons {
+    margin-top: 10%;
+    display: flex;
+}
+
+.options {
+    padding: 1.5rem;
+    margin-top: 20rem;
+    margin-left: 5rem;
+    width: 20rem;
+    background-color: var(--pink);
+    border: 3px solid black;
+    border-radius: 2rem;
+    text-align: center;
+}
+
+.options:hover {
+    background-color: var(--green);
+}
+
+/* Responsive design; need to make the options stack when browser width is small */
+
+@media screen and (max-width: 1200px) {
+
+    #question-text {
+        margin-bottom: 5rem;
+    }
+
+    .options {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 2rem;
+        margin-bottom: 5rem;
+        flex-shrink: 1;
+    }
+}
