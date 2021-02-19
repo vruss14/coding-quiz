@@ -38,316 +38,195 @@ startButton.addEventListener("click", function setTimer() {
 //Beginning variables
 
 let userScore = 0;
-let homeInfo = document.querySelector("#quiz-heading");
-let questionHeader = document.querySelector ("#question-text");
+let homeInfo = document.getElementById ("quiz-heading");
+let questionHeader = document.getElementById ("question-text");
 
-let choiceA = document.querySelector ("#optiona");
-let choiceB = document.querySelector ("#optionb");
-let choiceC = document.querySelector ("#optionc");
-let choiceD = document.querySelector ("#optiond");
+let choiceA = document.getElementById ("optiona");
+let choiceB = document.getElementById ("optionb");
+let choiceC = document.getElementById ("optionc");
+let choiceD = document.getElementById ("optiond");
 
-let firstQuestion = "Which of the following HTML elements is a self-closing tag?";
-let secondQuestion = "When linking an external CSS stylesheet, which of the following attributes is NOT needed?";
-let thirdQuestion = "What is the functionality of the HTML code: <meta name = “viewport” content = “width=device-width, initial-scale=1.0”> ?";
-let fourthQuestion = "What is the correct order for the CSS box model when considering the innermost components to the outermost components?";
-let fifthQuestion = "What is the difference between em and vw in CSS?";
-let sixthQuestion = "When selecting a specific class in CSS, what symbol should precede the class name?";
-let seventhQuestion = "Which of the following is not a primitive type of data in JavaScript?";
-let eighthQuestion = "console.log(a%b); will tell you what in the console?";
-let ninthQuestion = "When using a conditional statement, what happens if an “if” statement is included without an “else” statement?";
-let tenthQuestion = "How can a programmer remove commas between items in an array when displaying results?";
+let questionBank = [
+    
+    {question: "Which of the following HTML elements is a self-closing tag?", 
+    answerA: "<body>", 
+    answerB: "<li>", 
+    answerC: "<img>", 
+    answerD: "<a>", 
+    correctAnswer: "<img>"},
+
+    {question: "When linking an external CSS stylesheet, which of the following attributes is NOT needed?", 
+    answerA: "rel", 
+    answerB: "type", 
+    answerC: "href", 
+    answerD: "src",
+    correctAnswer: "src"},
+
+    {question: "What is the functionality of the HTML code: <meta name = “viewport” content = “width=device-width, initial-scale=1.0”> ?", 
+    answerA: "Sets the user’s viewport width and zoom level to ensure responsive design components of the code are rendered properly", 
+    answerB: "Ensures that the content is rendered properly for only desktop computers",
+    answerC: "Sets a universal height and width for HTML content regardless of the user’s device size", 
+    answerD: "It has no functionality for the user experience and is included for semantic reasons",
+    correctAnswer: "Sets the user’s viewport width and zoom level to ensure responsive design components of the code are rendered properly"},
+
+    {question: "What is the correct order for the CSS box model when considering the innermost components to the outermost components?", 
+    answerA: "Content, border, padding, margins", 
+    answerB: "Content, padding, border, margins", 
+    answerC: "Padding, content, border, margins", 
+    answerD: "Padding, content, margins, border",
+    correctAnswer: "Content, padding, border, margins"},
+
+    {question: "What is the difference between em and vw in CSS?", 
+    answerA: "em refers to font scaling, while vw is a percentage width of the viewport", 
+    answerB: "There are no fundamental differences and can thus be used interchangeably", 
+    answerC: "em refers to the viewport width, while vw handles font scaling", 
+    answerD: "em handles the viewport width, while vw handles the viewport height",
+    correctAnswer: "em refers to font scaling, while vw is a percentage width of the viewport"},
+
+    {question: "When selecting a specific class in CSS, what symbol should precede the class name?", 
+    answerA: "*", 
+    answerB: "#", 
+    answerC: ".", 
+    answerD: "::",
+    correctAnswer: "."},
+
+    {question: "Which of the following is NOT a primitive type of data in JavaScript?", 
+    answerA: "Strings", 
+    answerB: "Booleans", 
+    answerC: "Numbers", 
+    answerD: "Comparisons",
+    correctAnswer: "Comparisons"},
+
+    {question: "console.log(a%b); will tell you what in the console?", 
+    answerA: "The remainder after a is divided by b", 
+    answerB: "The percentage of a relative to b", 
+    answerC: "The percentage of b relative to a", 
+    answerD: "The answer when a is divided by b",
+    correctAnswer: "The remainder after a is divided by b"},
+
+    {question: "When using a conditional statement, what happens if an “if” statement is included without an “else” statement?", 
+    answerA: "An error will display in the console", 
+    answerB: "The computer will only act if the “if” statement holds true, and if not, it will do nothing", 
+    answerC: "The computer will perform the same action whether or not the “if” statement is true", 
+    answerD: "Nothing will happen regardless of if the “if” statement is true",
+    correctAnswer: "The computer will only act if the “if” statement holds true, and if not, it will do nothing"},
+
+    {question: "How can a programmer remove commas between items in an array when displaying results?", 
+    answerA: "The .removeCommas method", 
+    answerB: "The .deletePunctuation method", 
+    answerC: "The .join method", 
+    answerD: "The .link method",
+    correctAnswer: "The .join method"},
+]
 
 //Question one
+
+let currentQuestion = 0;
 
 startButton.addEventListener("click", function runQuestionOne() {
     homeInfo.setAttribute ("style", "display: none");
 
-    questionHeader.textContent = firstQuestion;
-    optiona.textContent = "<body>";
-    optionb.textContent = "<li>";
-    optionc.textContent = "<img>";
-    optiond.textContent = "<a>";
+    questionHeader.textContent = questionBank[0].question;
+    optiona.textContent = questionBank[0].answerA;
+    optionb.textContent = questionBank[0].answerB;
+    optionc.textContent = questionBank[0].answerC;
+    optiond.textContent = questionBank[0].answerD;
 });
 
-// When a user answers questions one and two
+questionBank.forEach(element => console.log(element.correctAnswer));
 
-choiceA.addEventListener("click", userResponses);
-choiceB.addEventListener("click", userResponses);
-choiceC.addEventListener("click", userResponses);
-choiceD.addEventListener("click", userResponses);
+// When a user answers questions
 
-function userResponses (event) {
+choiceA.addEventListener("click", displayNextQuestion);
+choiceB.addEventListener("click", displayNextQuestion);
+choiceC.addEventListener("click", displayNextQuestion);
+choiceD.addEventListener("click", displayNextQuestion);
 
-    if (event.target.textContent == "<img>") {
-        userScore = userScore + 10;
-        console.log(userScore);
-        runQuestionTwo ();
-    } else if (event.target.textContent == "<body>" || "<li>" || "<a>") {
-        secondsRemaining = secondsRemaining -15;
-        runQuestionTwo ();
-    } else if (event.target.textContent == "src") {
-        userScore = userScore + 10;
-        console.log(userScore);
-    } else if (event.target.textContent == "rel" || "type" || "href") {
-        secondsRemaining = secondsRemaining -15;
-    }
-    return;
-}
+/* function nextQuestion () {
+    currentQuestion++;
+    console.log(currentQuestion);
+} */
 
-// Question two
+//Could display questions if the loop can start and stop based on clicks
 
-function runQuestionTwo () {
-    questionHeader.textContent = secondQuestion;
-    optiona.textContent = "rel";
-    optionb.textContent = "type";
-    optionc.textContent = "href";
-    optiond.textContent = "src";
-}
-
-/*
-// Question three
-
-function runQuestionThree () {
-    questionHeader.textContent = thirdQuestion;
-    optiona.textContent = "Sets the user’s viewport width and zoom level to ensure responsive design components of the code are rendered properly";
-    optionb.textContent = "Ensures that the content is rendered properly for only desktop computers";
-    optionc.textContent = "Sets a universal height and width for HTML content regardless of the user’s device size";
-    optiond.textContent = "It has no functionality for the user experience and is included for semantic reasons";
-}
-
-function userResponseThree (event) {
-    if (event.target.id == "optiona") {
-        userScore = userScore + 10;
-        console.log(userScore);
-    } else if (event.target.id == "optionb") {
-        secondsRemaining = secondsRemaining - 15;
-    } else if (event.target.id == "optionc") {
-        secondsRemaining = secondsRemaining - 15;
-    } else {
-        secondsRemaining = secondsRemaining - 15;
-    }
-    runQuestionFour();
-    return;
-}
-
-choiceA.addEventListener("click", userResponseThree);
-choiceB.addEventListener("click", userResponseThree);
-choiceC.addEventListener("click", userResponseThree);
-choiceD.addEventListener("click", userResponseThree);
-
-
-// Question four
-
-function runQuestionFour () {
-    questionHeader.textContent = fourthQuestion;
-    optiona.textContent = "Content, border, padding, margins";
-    optionb.textContent = "Content, padding, border, margins";
-    optionc.textContent = "Padding, content, border, margins";
-    optiond.textContent = "Padding, content, margins, border";
-}
-
-function userResponseFour (event) {
-    if (event.target.id == "optiona") {
-        secondsRemaining = secondsRemaining - 15;
-    } else if (event.target.id == "optionb") {
-        userScore = userScore + 10;
-        console.log(userScore);
-    } else if (event.target.id == "optionc") {
-        secondsRemaining = secondsRemaining - 15;
-    } else {
-        secondsRemaining = secondsRemaining - 15;
-    }
-    runQuestionFive();
-    return;
-}
-
-choiceA.addEventListener("click", userResponseFour);
-choiceB.addEventListener("click", userResponseFour);
-choiceC.addEventListener("click", userResponseFour);
-choiceD.addEventListener("click", userResponseFour);
-
-
-// Question five
-
-function runQuestionFive () {
-    questionHeader.textContent = fifthQuestion;
-    optiona.textContent = "em refers to font scaling, while vw is a percentage width of the viewport";
-    optionb.textContent = "There are no fundamental differences and can thus be used interchangeably";
-    optionc.textContent = "em refers to the viewport width, while vw handles font scaling";
-    optiond.textContent = "em handles the viewport width, while vw handles the viewport height";
-    return;
-}
-
-function userResponseFive (event) {
-    if (event.target.id == "optiona") {
-        userScore = userScore + 10;
-        console.log(userScore);
-    } else if (event.target.id == "optionb") {
-        secondsRemaining = secondsRemaining - 15;
-    } else if (event.target.id == "optionc") {
-        secondsRemaining = secondsRemaining - 15;
-    } else {
-        secondsRemaining = secondsRemaining - 15;
-    }
-    runQuestionSix();
-    return;
-}
-
-choiceA.addEventListener("click", userResponseFive);
-choiceB.addEventListener("click", userResponseFive);
-choiceC.addEventListener("click", userResponseFive);
-choiceD.addEventListener("click", userResponseFive);
-
-
-// Question six
-
-function runQuestionSix () {
-    questionHeader.textContent = sixthQuestion;
-    optiona.textContent = "*";
-    optionb.textContent = "#";
-    optionc.textContent = ".";
-    optiond.textContent = "::";
-}
-
-function userResponseSix (event) {
-    if (event.target.id == "optiona") {
-        secondsRemaining = secondsRemaining - 15;
-    } else if (event.target.id == "optionb") {
-        secondsRemaining = secondsRemaining - 15;
-    } else if (event.target.id == "optionc") {
-        userScore = userScore + 10;
-        console.log(userScore);
-    } else {
-        secondsRemaining = secondsRemaining - 15;
-    }
-    runQuestionSeven();
-    return;
-}
-
-choiceA.addEventListener("click", userResponseSix);
-choiceB.addEventListener("click", userResponseSix);
-choiceC.addEventListener("click", userResponseSix);
-choiceD.addEventListener("click", userResponseSix);
-
-
-// Question seven
-
-function runQuestionSeven () {
-    questionHeader.textContent = seventhQuestion;
-    optiona.textContent = "Strings";
-    optionb.textContent = "Booleans";
-    optionc.textContent = "Numbers";
-    optiond.textContent = "Comparisons";
-}
-
-function userResponseSeven (event) {
-    if (event.target.id == "optiona") {
-        secondsRemaining = secondsRemaining - 15;
-    } else if (event.target.id == "optionb") {
-        secondsRemaining = secondsRemaining - 15;
-    } else if (event.target.id == "optionc") {
-        secondsRemaining = secondsRemaining - 15;
-    } else {
-        userScore = userScore + 10;
-        console.log(userScore);
-    }
-    runQuestionEight();
-    return;
-}
-
-choiceA.addEventListener("click", userResponseSeven);
-choiceB.addEventListener("click", userResponseSeven);
-choiceC.addEventListener("click", userResponseSeven);
-choiceD.addEventListener("click", userResponseSeven);
-
-
-// Question eight
-
-function runQuestionEight () {
-    questionHeader.textContent = eighthQuestion;
-    optiona.textContent = "The remainder after a is divided by b";
-    optionb.textContent = "The percentage of a relative to b";
-    optionc.textContent = "The percentage of b relative to a";
-    optiond.textContent = "The answer when a is divided by b";
-}
-
-function userResponseEight (event) {
-    if (event.target.id == "optiona") {
-        userScore = userScore + 10;
-        console.log(userScore);
-    } else if (event.target.id == "optionb") {
-        secondsRemaining = secondsRemaining - 15;
-    } else if (event.target.id == "optionc") {
-        secondsRemaining = secondsRemaining - 15;
-    } else {
-        secondsRemaining = secondsRemaining - 15;
-    }
-    runQuestionNine();
-    return;
-}
-
-choiceA.addEventListener("click", userResponseEight);
-choiceB.addEventListener("click", userResponseEight);
-choiceC.addEventListener("click", userResponseEight);
-choiceD.addEventListener("click", userResponseEight);
-
-
-// Question nine
-
-function runQuestionNine () {
-    questionHeader.textContent = ninthQuestion;
-    optiona.textContent = "An error will display in the console";
-    optionb.textContent = "The computer will only act if the “if” statement holds true, and if not, it will do nothing";
-    optionc.textContent = "The computer will perform the same action whether or not the “if” statement is true";
-    optiond.textContent = "Nothing will happen regardless of if the “if” statement is true";
-}
-
-function userResponseNine (event) {
-    if (event.target.id == "optiona") {
-        secondsRemaining = secondsRemaining - 15;
-    } else if (event.target.id == "optionb") {
-        userScore = userScore + 10;
-        console.log(userScore);
-    } else if (event.target.id == "optionc") {
-        secondsRemaining = secondsRemaining - 15;
-    } else {
-        secondsRemaining = secondsRemaining - 15;
-    }
-    runQuestionTen();
-    return;
-}
-
-choiceA.addEventListener("click", userResponseNine);
-choiceB.addEventListener("click", userResponseNine);
-choiceC.addEventListener("click", userResponseNine);
-choiceD.addEventListener("click", userResponseNine);
-
-
-// Question ten
-
-function runQuestionTen () {
-    questionHeader.textContent = tenthQuestion;
-    optiona.textContent = "The .removeCommas method";
-    optionb.textContent = "The .deletePunctuation method";
-    optionc.textContent = "The .join method";
-    optiond.textContent = "The .link method";
-}
-
-function userResponseTen (event) {
-    if (event.target.id == "optiona") {
-        secondsRemaining = secondsRemaining - 15;
-    } else if (event.target.id == "optionb") {
-        secondsRemaining = secondsRemaining - 15;
-    } else if (event.target.id == "optionc") {
-        userScore = userScore + 10;
-        console.log(userScore);
-    } else {
-        secondsRemaining = secondsRemaining - 15;
+function displayNextQuestion () {
+    for(let i= currentQuestion; i < questionBank.length; i++) {
+        questionHeader.textContent = questionBank[i].question;
+        optiona.textContent = questionBank[i].answerA;
+        optionb.textContent = questionBank[i].answerB;
+        optionc.textContent = questionBank[i].answerC;
+        optiond.textContent = questionBank[i].answerD;
     }
 }
 
-choiceA.addEventListener("click", userResponseTen);
-choiceB.addEventListener("click", userResponseTen);
-choiceC.addEventListener("click", userResponseTen);
-choiceD.addEventListener("click", userResponseTen); */
-
+/* function displayNext () {
+    currentQuestion++;
+    if (currentQuestion == 0) {
+        questionHeader.textContent = questionBank[0].question;
+        optiona.textContent = questionBank[0].answerA;
+        optionb.textContent = questionBank[0].answerB;
+        optionc.textContent = questionBank[0].answerC;
+        optiond.textContent = questionBank[0].answerD;
+    } else if (currentQuestion == 1) {
+        questionHeader.textContent = questionBank[1].question;
+        optiona.textContent = questionBank[1].answerA;
+        optionb.textContent = questionBank[1].answerB;
+        optionc.textContent = questionBank[1].answerC;
+        optiond.textContent = questionBank[1].answerD;
+    } else if (currentQuestion == 2) {
+        questionHeader.textContent = questionBank[2].question;
+        optiona.textContent = questionBank[2].answerA;
+        optionb.textContent = questionBank[2].answerB;
+        optionc.textContent = questionBank[2].answerC;
+        optiond.textContent = questionBank[2].answerD;
+    } else if (currentQuestion == 3) {
+        questionHeader.textContent = questionBank[3].question;
+        optiona.textContent = questionBank[3].answerA;
+        optionb.textContent = questionBank[3].answerB;
+        optionc.textContent = questionBank[3].answerC;
+        optiond.textContent = questionBank[3].answerD;
+    } else if (currentQuestion == 4) {
+        questionHeader.textContent = questionBank[4].question;
+        optiona.textContent = questionBank[4].answerA;
+        optionb.textContent = questionBank[4].answerB;
+        optionc.textContent = questionBank[4].answerC;
+        optiond.textContent = questionBank[4].answerD;
+    } else if (currentQuestion == 5) {
+        questionHeader.textContent = questionBank[5].question;
+        optiona.textContent = questionBank[5].answerA;
+        optionb.textContent = questionBank[5].answerB;
+        optionc.textContent = questionBank[5].answerC;
+        optiond.textContent = questionBank[5].answerD;
+    } else if (currentQuestion == 6) {
+        questionHeader.textContent = questionBank[6].question;
+        optiona.textContent = questionBank[6].answerA;
+        optionb.textContent = questionBank[6].answerB;
+        optionc.textContent = questionBank[6].answerC;
+        optiond.textContent = questionBank[6].answerD;
+    } else if (currentQuestion == 7) {
+        questionHeader.textContent = questionBank[7].question;
+        optiona.textContent = questionBank[7].answerA;
+        optionb.textContent = questionBank[7].answerB;
+        optionc.textContent = questionBank[7].answerC;
+        optiond.textContent = questionBank[7].answerD;
+    } else if (currentQuestion == 8) {
+        questionHeader.textContent = questionBank[8].question;
+        optiona.textContent = questionBank[8].answerA;
+        optionb.textContent = questionBank[8].answerB;
+        optionc.textContent = questionBank[8].answerC;
+        optiond.textContent = questionBank[8].answerD;
+    } else if (currentQuestion == 9) {
+        questionHeader.textContent = questionBank[9].question;
+        optiona.textContent = questionBank[9].answerA;
+        optionb.textContent = questionBank[9].answerB;
+        optionc.textContent = questionBank[9].answerC;
+        optiond.textContent = questionBank[9].answerD;
+    } else if (currentQuestion == 10) {
+        questionHeader.textContent = questionBank[10].question;
+        optiona.textContent = questionBank[10].answerA;
+        optionb.textContent = questionBank[10].answerB;
+        optionc.textContent = questionBank[10].answerC;
+        optiond.textContent = questionBank[10].answerD;
+        return;
+    }
+} */
