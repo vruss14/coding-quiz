@@ -28,8 +28,20 @@ startButton.addEventListener("click", function setTimer() {
             timeLeft.setAttribute("style", "color: red");
         }
 
-        if(secondsRemaining === 0) {
+        if(secondsRemaining <= 0) {
             clearInterval(timerInterval);
+            timeLeft.textContent = "Time left: " + 0;
+
+            let questionsSection = document.getElementById("questions");
+            questionsSection.setAttribute("style", "display: none");
+
+            let overScreen = document.createElement("h1");
+            document.body.appendChild(overScreen);
+            overScreen.setAttribute("style", "font-size: 10rem; color: var(--blue); line-height: 1.25; text-align: center; margin-top: 30%;");
+            overScreen.textContent = "GAME OVER";
+
+
+
         }
         
     }, 1000);
