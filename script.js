@@ -31,17 +31,7 @@ startButton.addEventListener("click", function setTimer() {
         if(secondsRemaining <= 0) {
             clearInterval(timerInterval);
             timeLeft.textContent = "Time left: " + 0;
-
-            let questionsSection = document.getElementById("questions");
-            questionsSection.setAttribute("style", "display: none");
-
-            let overScreen = document.createElement("h1");
-            document.body.appendChild(overScreen);
-            overScreen.setAttribute("style", "font-size: 10rem; color: var(--blue); line-height: 1.25; text-align: center; margin-top: 30%;");
-            overScreen.textContent = "GAME OVER";
-
-
-
+            runGameOverScreen();
         }
         
     }, 1000);
@@ -239,4 +229,65 @@ function gradeQuestion (event) {
     } else if (currentQuestion == 9 && event.target.id != "optionc") {
         secondsRemaining = secondsRemaining - 10;
     }
+}
+
+function runGameOverScreen () {
+
+    // Dynamically creating the page's elements
+
+    let questionsSection = document.getElementById("questions");
+    questionsSection.setAttribute("style", "display: none");
+
+    let overScreen = document.createElement("h1");
+    document.body.appendChild(overScreen);
+    overScreen.setAttribute("style", "font-size: 10rem; color: var(--blue); text-align: center; margin-top: 10%;");
+    overScreen.textContent = "GAME OVER";
+
+    let yourScore = document.createElement("h2");
+    document.body.appendChild(yourScore);
+    yourScore.textContent = "YOUR SCORE WAS: " + userScore;
+    yourScore.setAttribute ("style", "font-size: 5rem; color: var(--yellow); text-align: center; margin-top: 5%; margin-bottom: 4%;");
+
+    let initialsContainer = document.createElement("div");
+    document.body.appendChild(initialsContainer);
+    initialsContainer.setAttribute("style", "display: flex; justify-content: center; flex-direction: column; margin-left: 31%; margin-right: 30%;");
+    initialsContainer.setAttribute("id", "initials-container");
+
+    let initialsPrompt = document.createElement("label");
+    document.body.children[5].appendChild(initialsPrompt);
+    initialsPrompt.textContent = "ENTER YOUR INITIALS: ";
+    initialsPrompt.setAttribute("style", "color: var(--pink); text-align: center; margin-top: 11%;");
+
+    let initialsField = document.createElement("input");
+    document.body.children[5].appendChild(initialsField);
+    initialsField.textContent = "";
+    initialsField.setAttribute("style", "padding: 0.5rem; background-color: var(--green); margin-top: 10%; text-align: center; margin-left:3rem; margin-right: 3rem;");
+    initialsField.setAttribute("type", "text");
+    initialsField.setAttribute("id", "initials-field");
+
+    let initialsSubmit = document.createElement("button");
+    document.body.children[5].appendChild(initialsSubmit);
+    initialsSubmit.textContent = "SUBMIT";
+    initialsSubmit.setAttribute("type", "submit");
+    initialsSubmit.setAttribute("style", "padding: 0.5rem; background-color: var(--blue); color: var(--darkgreen); height: 4rem; margin-top: 11%; border-radius: 2rem;");
+    initialsSubmit.setAttribute("id", "submit-score");
+
+    // Working on displaying high scores
+
+    let userInput = document.querySelector("#initials-field");
+    let displayedInitials = userInput.textContent;
+
+    let pressedSubmit = document.querySelector("#submit-score");
+    pressedSubmit.addEventListener("click", runHighScores);
+
+    function runHighScores(type, initials) {
+        console.log("Your event listener works!");
+        displayedInitials = initials;
+        displayedInitials.setAttribute("class", type);
+        
+        // Uncaught TypeError: Cannot read property 'setAttribute' of undefined
+        console.log(displayedInitials);
+        
+    }
+
 }
