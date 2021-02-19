@@ -133,22 +133,19 @@ startButton.addEventListener("click", function runQuestionOne() {
     optiond.textContent = questionBank[0].answerD;
 });
 
-questionBank.forEach(element => console.log(element.correctAnswer));
-
 // When a user answers questions
 
-choiceA.addEventListener("click", displayNextQuestion);
-choiceB.addEventListener("click", displayNextQuestion);
-choiceC.addEventListener("click", displayNextQuestion);
-choiceD.addEventListener("click", displayNextQuestion);
+choiceA.addEventListener("click", nextQuestion);
+choiceB.addEventListener("click", nextQuestion);
+choiceC.addEventListener("click", nextQuestion);
+choiceD.addEventListener("click", nextQuestion);
 
-/* function nextQuestion () {
+function nextQuestion () {
+    gradeQuestion();
     currentQuestion++;
-    console.log(currentQuestion);
-} */
-
-//Could display questions if the loop can start and stop based on clicks
-
+    displayNextQuestion();
+    
+}
 function displayNextQuestion () {
     for(let i= currentQuestion; i < questionBank.length; i++) {
         questionHeader.textContent = questionBank[i].question;
@@ -156,77 +153,18 @@ function displayNextQuestion () {
         optionb.textContent = questionBank[i].answerB;
         optionc.textContent = questionBank[i].answerC;
         optiond.textContent = questionBank[i].answerD;
+        return;
     }
 }
 
-/* function displayNext () {
-    currentQuestion++;
-    if (currentQuestion == 0) {
-        questionHeader.textContent = questionBank[0].question;
-        optiona.textContent = questionBank[0].answerA;
-        optionb.textContent = questionBank[0].answerB;
-        optionc.textContent = questionBank[0].answerC;
-        optiond.textContent = questionBank[0].answerD;
-    } else if (currentQuestion == 1) {
-        questionHeader.textContent = questionBank[1].question;
-        optiona.textContent = questionBank[1].answerA;
-        optionb.textContent = questionBank[1].answerB;
-        optionc.textContent = questionBank[1].answerC;
-        optiond.textContent = questionBank[1].answerD;
-    } else if (currentQuestion == 2) {
-        questionHeader.textContent = questionBank[2].question;
-        optiona.textContent = questionBank[2].answerA;
-        optionb.textContent = questionBank[2].answerB;
-        optionc.textContent = questionBank[2].answerC;
-        optiond.textContent = questionBank[2].answerD;
-    } else if (currentQuestion == 3) {
-        questionHeader.textContent = questionBank[3].question;
-        optiona.textContent = questionBank[3].answerA;
-        optionb.textContent = questionBank[3].answerB;
-        optionc.textContent = questionBank[3].answerC;
-        optiond.textContent = questionBank[3].answerD;
-    } else if (currentQuestion == 4) {
-        questionHeader.textContent = questionBank[4].question;
-        optiona.textContent = questionBank[4].answerA;
-        optionb.textContent = questionBank[4].answerB;
-        optionc.textContent = questionBank[4].answerC;
-        optiond.textContent = questionBank[4].answerD;
-    } else if (currentQuestion == 5) {
-        questionHeader.textContent = questionBank[5].question;
-        optiona.textContent = questionBank[5].answerA;
-        optionb.textContent = questionBank[5].answerB;
-        optionc.textContent = questionBank[5].answerC;
-        optiond.textContent = questionBank[5].answerD;
-    } else if (currentQuestion == 6) {
-        questionHeader.textContent = questionBank[6].question;
-        optiona.textContent = questionBank[6].answerA;
-        optionb.textContent = questionBank[6].answerB;
-        optionc.textContent = questionBank[6].answerC;
-        optiond.textContent = questionBank[6].answerD;
-    } else if (currentQuestion == 7) {
-        questionHeader.textContent = questionBank[7].question;
-        optiona.textContent = questionBank[7].answerA;
-        optionb.textContent = questionBank[7].answerB;
-        optionc.textContent = questionBank[7].answerC;
-        optiond.textContent = questionBank[7].answerD;
-    } else if (currentQuestion == 8) {
-        questionHeader.textContent = questionBank[8].question;
-        optiona.textContent = questionBank[8].answerA;
-        optionb.textContent = questionBank[8].answerB;
-        optionc.textContent = questionBank[8].answerC;
-        optiond.textContent = questionBank[8].answerD;
-    } else if (currentQuestion == 9) {
-        questionHeader.textContent = questionBank[9].question;
-        optiona.textContent = questionBank[9].answerA;
-        optionb.textContent = questionBank[9].answerB;
-        optionc.textContent = questionBank[9].answerC;
-        optiond.textContent = questionBank[9].answerD;
-    } else if (currentQuestion == 10) {
-        questionHeader.textContent = questionBank[10].question;
-        optiona.textContent = questionBank[10].answerA;
-        optionb.textContent = questionBank[10].answerB;
-        optionc.textContent = questionBank[10].answerC;
-        optiond.textContent = questionBank[10].answerD;
-        return;
+// Error: Cannot read property 'target' of undefined
+
+function gradeQuestion (event) {
+    if (currentQuestion == 0 && event.target.id == "optionc") {
+        userScore = userScore + 10;
+        console.log(userScore);
+    } else if (currentQuestion == 0 && event.target.id != "optionc") {
+        secondsRemaining = secondsRemaining - 10;
     }
-} */
+
+}
