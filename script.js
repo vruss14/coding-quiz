@@ -140,8 +140,8 @@ choiceB.addEventListener("click", nextQuestion);
 choiceC.addEventListener("click", nextQuestion);
 choiceD.addEventListener("click", nextQuestion);
 
-function nextQuestion () {
-    gradeQuestion();
+function nextQuestion (event) {
+    gradeQuestion(event);
     currentQuestion++;
     displayNextQuestion();
     
@@ -157,8 +157,6 @@ function displayNextQuestion () {
     }
 }
 
-// Error: Cannot read property 'target' of undefined
-
 function gradeQuestion (event) {
     if (currentQuestion == 0 && event.target.id == "optionc") {
         userScore = userScore + 10;
@@ -167,4 +165,66 @@ function gradeQuestion (event) {
         secondsRemaining = secondsRemaining - 10;
     }
 
+    if (currentQuestion == 1 && event.target.id == "optiond") {
+        userScore = userScore + 10;
+        console.log(userScore);
+    } else if (currentQuestion == 1 && event.target.id != "optiond") {
+        secondsRemaining = secondsRemaining - 10;
+    }
+
+    if (currentQuestion == 2 && event.target.id == "optiona") {
+        userScore = userScore + 10;
+        console.log(userScore);
+    } else if (currentQuestion == 2 && event.target.id != "optiona") {
+        secondsRemaining = secondsRemaining - 10;
+    }
+
+    if (currentQuestion == 3 && event.target.id == "optionb") {
+        userScore = userScore + 10;
+        console.log(userScore);
+    } else if (currentQuestion == 3 && event.target.id != "optionb") {
+        secondsRemaining = secondsRemaining - 10;
+    }
+
+    if (currentQuestion == 4 && event.target.id == "optiona") {
+        userScore = userScore + 10;
+        console.log(userScore);
+    } else if (currentQuestion == 4 && event.target.id != "optiona") {
+        secondsRemaining = secondsRemaining - 10;
+    }
+
+    if (currentQuestion == 5 && event.target.id == "optionc") {
+        userScore = userScore + 10;
+        console.log(userScore);
+    } else if (currentQuestion == 5 && event.target.id != "optionc") {
+        secondsRemaining = secondsRemaining - 10;
+    }
+
+    if (currentQuestion == 6 && event.target.id == "optiond") {
+        userScore = userScore + 10;
+        console.log(userScore);
+    } else if (currentQuestion == 6 && event.target.id != "optiond") {
+        secondsRemaining = secondsRemaining - 10;
+    }
+
+    if (currentQuestion == 7 && event.target.id == "optiona") {
+        userScore = userScore + 10;
+        console.log(userScore);
+    } else if (currentQuestion == 7 && event.target.id != "optiona") {
+        secondsRemaining = secondsRemaining - 10;
+    }
+
+    if (currentQuestion == 8 && event.target.id == "optionb") {
+        userScore = userScore + 10;
+        console.log(userScore);
+    } else if (currentQuestion == 8 && event.target.id != "optionb") {
+        secondsRemaining = secondsRemaining - 10;
+    }
+
+    if (currentQuestion == 9 && event.target.id == "optionc") {
+        userScore = userScore + 10;
+        console.log(userScore);
+    } else if (currentQuestion == 9 && event.target.id != "optionc") {
+        secondsRemaining = secondsRemaining - 10;
+    }
 }
