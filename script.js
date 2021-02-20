@@ -272,22 +272,43 @@ function runGameOverScreen () {
     initialsSubmit.setAttribute("style", "padding: 0.5rem; background-color: var(--blue); color: var(--darkgreen); height: 4rem; margin-top: 11%; border-radius: 2rem;");
     initialsSubmit.setAttribute("id", "submit-score");
 
-    // Working on displaying high scores
-
-    let userInput = document.querySelector("#initials-field");
-    let displayedInitials = userInput.textContent;
-
     let pressedSubmit = document.querySelector("#submit-score");
     pressedSubmit.addEventListener("click", runHighScores);
 
-    function runHighScores(type, initials) {
-        console.log("Your event listener works!");
-        displayedInitials = initials;
-        displayedInitials.setAttribute("class", type);
-        
-        // Uncaught TypeError: Cannot read property 'setAttribute' of undefined
-        console.log(displayedInitials);
-        
+
+    function runHighScores() {
+
+        overScreen.setAttribute("style", "display: none");
+        yourScore.setAttribute("style", "display: none");
+        initialsContainer.setAttribute("style", "display: none");
+        initialsField.setAttribute("style", "display: none");
+        initialsSubmit.setAttribute("style", "display: none");
+
+        let highScoresHeader = document.createElement("h1");
+        document.body.appendChild(highScoresHeader);
+        highScoresHeader.textContent = "HIGH SCORES";
+        highScoresHeader.setAttribute("style", "font-size: 5rem; color: var(--yellow); text-align: center; margin-top: 15%;");
+
+        let userInput = document.querySelector("#initials-field");
+        console.log(userInput.value);
+
+        // Working on local storage
+
+        let allScores = [];
+
+        let userInitials = document.createElement("p")
+        document.body.appendChild(userInitials);
+        userInitials.textContent = userInput.value + "          .....          " + userScore;
+        userInitials.setAttribute("style", "font-size: 3rem; color: var(--blue); text-align: center; margin-top: 5%; margin-left: 3%; margin-right: 3%; margin-bottom: 3%;")
+        allScores = allScores.concat(userInitials.textContent);
+
+        localStorage.setItem("scores", allScores);
+        displayAllScores();
+
+        function displayAllScores() {
+            let retrievedScores = localStorage.getItem("scores");
+            userInitials.textContent = retrievedScores;
+        }
     }
 
 }
