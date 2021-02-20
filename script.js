@@ -294,26 +294,26 @@ function runGameOverScreen () {
 
         // Working on local storage
 
-        let allScores = localStorage.getItem("scores");
-
         let userInitials = document.createElement("p")
         document.body.appendChild(userInitials);
         userInitials.textContent = userInput.value + "          .....          " + userScore;
         userInitials.setAttribute("style", "font-size: 3rem; color: var(--blue); text-align: center; margin-top: 5%; margin-left: 3%; margin-right: 3%; margin-bottom: 3%;");
-        allScores = allScores.concat(userInitials.textContent);
+
+        let allScores = localStorage.getItem("scores");
+
+        if(allScores == null){
+            allScores = userInitials.textContent;
+          } else {
+            allScores = allScores.concat(userInitials.textContent);
+          }
 
         localStorage.setItem("scores", allScores);
         displayAllScores();
 
         function displayAllScores() {
             let retrievedScores = localStorage.getItem("scores");
-            userInitials.textContent = retrievedScores;
 
-            //Uncaught TypeError: Cannot read property 'concat' of null on line 303
-
-            if (retrievedScores == null) {
-                retrievedScores.setAttribute("style", "display: none");
-            }
+            //returns one character at a time
 
             for (let i=0; i < retrievedScores.length; i++) {
                 let score = retrievedScores[i];
@@ -321,8 +321,10 @@ function runGameOverScreen () {
                 let p = document.createElement("p");
                 p.textContent = score;
                 p.setAttribute("data-index", i);
+                p.setAttribute("style", "font-size: 3rem; color: var(--blue); text-align: center; margin-top: 5%; margin-left: 3%; margin-right: 3%; margin-bottom: 3%;");
                 document.body.appendChild(p);
               }
+              return(p.join(""));
         }
     }
 
