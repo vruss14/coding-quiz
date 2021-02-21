@@ -294,37 +294,40 @@ function runGameOverScreen () {
 
         // Working on local storage
 
+        // Test at the top to ensure score displays
+
         let userInitials = document.createElement("p")
         document.body.appendChild(userInitials);
         userInitials.textContent = userInput.value + "          .....          " + userScore;
         userInitials.setAttribute("style", "font-size: 3rem; color: var(--blue); text-align: center; margin-top: 5%; margin-left: 3%; margin-right: 3%; margin-bottom: 3%;");
 
-        let allScores = localStorage.getItem("scores");
+        // Display stored scores
+        
+        let allScores = []; 
 
         if(allScores == null){
-            allScores = userInitials.textContent;
+            allScores.push(userInitials.textContent);
           } else {
-            allScores = allScores.concat(userInitials.textContent);
+            allScores = allScores.push(localStorage.getItem("scores"));
           }
 
-        localStorage.setItem("scores", allScores);
+        localStorage.setItem("scores", JSON.stringify(allScores));
         displayAllScores();
 
         function displayAllScores() {
-            let retrievedScores = localStorage.getItem("scores");
+            let retrievedScores = JSON.parse(localStorage.getItem("scores"));
 
-            //returns one character at a time
+            //No output
 
             for (let i=0; i < retrievedScores.length; i++) {
                 let score = retrievedScores[i];
             
                 let p = document.createElement("p");
                 p.textContent = score;
-                p.setAttribute("data-index", i);
+                // p.setAttribute("data-index", i);
                 p.setAttribute("style", "font-size: 3rem; color: var(--blue); text-align: center; margin-top: 5%; margin-left: 3%; margin-right: 3%; margin-bottom: 3%;");
                 document.body.appendChild(p);
               }
-              return(p.join(""));
         }
     }
 
