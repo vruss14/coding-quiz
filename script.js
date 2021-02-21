@@ -292,24 +292,17 @@ function runGameOverScreen () {
         let userInput = document.querySelector("#initials-field");
         console.log(userInput.value);
 
-        // Working on local storage
-
-        // Test at the top to ensure score displays
-
-        let userInitials = document.createElement("p")
-        document.body.appendChild(userInitials);
-        userInitials.textContent = userInput.value + "          .....          " + userScore;
-        userInitials.setAttribute("style", "font-size: 3rem; color: var(--blue); text-align: center; margin-top: 5%; margin-left: 3%; margin-right: 3%; margin-bottom: 3%;");
+        let userInfo = userInput.value + "          .....          " + userScore;
 
         // Display stored scores
         
-        let allScores = []; 
+        let allScores = JSON.parse(localStorage.getItem("scores")); 
 
         if(allScores == null){
-            allScores.push(userInitials.textContent);
-          } else {
-            allScores = allScores.push(localStorage.getItem("scores"));
-          }
+          allScores = [userInfo];
+        } else {
+          allScores.push(userInfo);
+        }
 
         localStorage.setItem("scores", JSON.stringify(allScores));
         displayAllScores();
@@ -317,14 +310,11 @@ function runGameOverScreen () {
         function displayAllScores() {
             let retrievedScores = JSON.parse(localStorage.getItem("scores"));
 
-            //No output
-
             for (let i=0; i < retrievedScores.length; i++) {
                 let score = retrievedScores[i];
             
                 let p = document.createElement("p");
                 p.textContent = score;
-                // p.setAttribute("data-index", i);
                 p.setAttribute("style", "font-size: 3rem; color: var(--blue); text-align: center; margin-top: 5%; margin-left: 3%; margin-right: 3%; margin-bottom: 3%;");
                 document.body.appendChild(p);
               }
