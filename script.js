@@ -68,7 +68,7 @@ let questionBank = [
     answerA: "Sets the user’s viewport width and zoom level to ensure responsive design components of the code are rendered properly", 
     answerB: "Ensures that the content is rendered properly for only desktop computers",
     answerC: "Sets a universal height and width for HTML content regardless of the user’s device size", 
-    answerD: "It has no functionality for the user experience and is included for semantic reasons",
+    answerD: "It is only included for semantic reasons",
     correctAnswer: "Sets the user’s viewport width and zoom level to ensure responsive design components of the code are rendered properly"},
 
     {question: "What is the correct order for the CSS box model when considering the innermost components to the outermost components?", 
@@ -80,7 +80,7 @@ let questionBank = [
 
     {question: "What is the difference between em and vw in CSS?", 
     answerA: "em refers to font scaling, while vw is a percentage width of the viewport", 
-    answerB: "There are no fundamental differences and can thus be used interchangeably", 
+    answerB: "There are no fundamental differences between em and vw", 
     answerC: "em refers to the viewport width, while vw handles font scaling", 
     answerD: "em handles the viewport width, while vw handles the viewport height",
     correctAnswer: "em refers to font scaling, while vw is a percentage width of the viewport"},
@@ -114,8 +114,8 @@ let questionBank = [
     correctAnswer: "The computer will only act if the “if” statement holds true, and if not, it will do nothing"},
 
     {question: "How can a programmer remove commas between items in an array when displaying results?", 
-    answerA: "The .removeCommas method", 
-    answerB: "The .deletePunctuation method", 
+    answerA: "The .remove method", 
+    answerB: "The .delete method", 
     answerC: "The .join method", 
     answerD: "The .link method",
     correctAnswer: "The .join method"},
