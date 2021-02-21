@@ -1,7 +1,8 @@
-// Testing the page
+// Verifying the HTML file is connected to the script
+
 console.log("Page loaded!");
 
-// Hide answer options when page is first displayed
+// Hide answer options when page is first loaded
 
 function init () {
     let choiceButtons = document.querySelector(".answer-buttons");
@@ -14,7 +15,8 @@ init ();
 
 let startButton = document.querySelector("#start-button");
 let timeLeft = document.querySelector(".time-left");
-let secondsRemaining = 60;
+let secondsRemaining = 120;
+let currentQuestion = 0;
 
 startButton.addEventListener("click", function setTimer() {
     let choiceButtons = document.querySelector(".answer-buttons");
@@ -28,7 +30,7 @@ startButton.addEventListener("click", function setTimer() {
             timeLeft.setAttribute("style", "color: red");
         }
 
-        if(secondsRemaining <= 0) {
+        if(secondsRemaining <= 0 || currentQuestion == 10) {
             clearInterval(timerInterval);
             timeLeft.textContent = "Time left: " + 0;
             runGameOverScreen();
@@ -36,8 +38,6 @@ startButton.addEventListener("click", function setTimer() {
         
     }, 1000);
 });
-
-//Beginning variables
 
 let userScore = 0;
 let homeInfo = document.getElementById ("quiz-heading");
@@ -121,9 +121,7 @@ let questionBank = [
     correctAnswer: "The .join method"},
 ]
 
-//Question one
-
-let currentQuestion = 0;
+//The first question displays after the user clicks the start button
 
 startButton.addEventListener("click", function runQuestionOne() {
     homeInfo.setAttribute ("style", "display: none");
@@ -135,7 +133,7 @@ startButton.addEventListener("click", function runQuestionOne() {
     optiond.textContent = questionBank[0].answerD;
 });
 
-// When a user answers questions
+// When a user answers each questions, the next question is displayed and the current question is checked
 
 choiceA.addEventListener("click", nextQuestion);
 choiceB.addEventListener("click", nextQuestion);
@@ -159,73 +157,65 @@ function displayNextQuestion () {
     }
 }
 
+// A correct answer increases the user's score by 10, while an incorrect answer decreases the time on the timer by 10
+
 function gradeQuestion (event) {
     if (currentQuestion == 0 && event.target.id == "optionc") {
         userScore = userScore + 10;
-        console.log(userScore);
     } else if (currentQuestion == 0 && event.target.id != "optionc") {
         secondsRemaining = secondsRemaining - 10;
     }
 
     if (currentQuestion == 1 && event.target.id == "optiond") {
         userScore = userScore + 10;
-        console.log(userScore);
     } else if (currentQuestion == 1 && event.target.id != "optiond") {
         secondsRemaining = secondsRemaining - 10;
     }
 
     if (currentQuestion == 2 && event.target.id == "optiona") {
         userScore = userScore + 10;
-        console.log(userScore);
     } else if (currentQuestion == 2 && event.target.id != "optiona") {
         secondsRemaining = secondsRemaining - 10;
     }
 
     if (currentQuestion == 3 && event.target.id == "optionb") {
         userScore = userScore + 10;
-        console.log(userScore);
     } else if (currentQuestion == 3 && event.target.id != "optionb") {
         secondsRemaining = secondsRemaining - 10;
     }
 
     if (currentQuestion == 4 && event.target.id == "optiona") {
         userScore = userScore + 10;
-        console.log(userScore);
     } else if (currentQuestion == 4 && event.target.id != "optiona") {
         secondsRemaining = secondsRemaining - 10;
     }
 
     if (currentQuestion == 5 && event.target.id == "optionc") {
         userScore = userScore + 10;
-        console.log(userScore);
     } else if (currentQuestion == 5 && event.target.id != "optionc") {
         secondsRemaining = secondsRemaining - 10;
     }
 
     if (currentQuestion == 6 && event.target.id == "optiond") {
         userScore = userScore + 10;
-        console.log(userScore);
     } else if (currentQuestion == 6 && event.target.id != "optiond") {
         secondsRemaining = secondsRemaining - 10;
     }
 
     if (currentQuestion == 7 && event.target.id == "optiona") {
         userScore = userScore + 10;
-        console.log(userScore);
     } else if (currentQuestion == 7 && event.target.id != "optiona") {
         secondsRemaining = secondsRemaining - 10;
     }
 
     if (currentQuestion == 8 && event.target.id == "optionb") {
         userScore = userScore + 10;
-        console.log(userScore);
     } else if (currentQuestion == 8 && event.target.id != "optionb") {
         secondsRemaining = secondsRemaining - 10;
     }
 
     if (currentQuestion == 9 && event.target.id == "optionc") {
         userScore = userScore + 10;
-        console.log(userScore);
     } else if (currentQuestion == 9 && event.target.id != "optionc") {
         secondsRemaining = secondsRemaining - 10;
     }
@@ -233,10 +223,11 @@ function gradeQuestion (event) {
 
 function runGameOverScreen () {
 
-    // Dynamically creating the page's elements
+    // Dynamically creating the game over screen elements
 
     let questionsSection = document.getElementById("questions");
     questionsSection.setAttribute("style", "display: none");
+    timeLeft.setAttribute("style", "display:none");
 
     let overScreen = document.createElement("h1");
     document.body.appendChild(overScreen);
@@ -275,14 +266,17 @@ function runGameOverScreen () {
     let pressedSubmit = document.querySelector("#submit-score");
     pressedSubmit.addEventListener("click", runHighScores);
 
-
     function runHighScores() {
+
+        // Hide previous elements
 
         overScreen.setAttribute("style", "display: none");
         yourScore.setAttribute("style", "display: none");
         initialsContainer.setAttribute("style", "display: none");
         initialsField.setAttribute("style", "display: none");
         initialsSubmit.setAttribute("style", "display: none");
+
+        // Create High Scores header and put together user info (their initials and score)
 
         let highScoresHeader = document.createElement("h1");
         document.body.appendChild(highScoresHeader);
@@ -291,18 +285,22 @@ function runGameOverScreen () {
 
         let userInput = document.querySelector("#initials-field");
         console.log(userInput.value);
-
         let userInfo = userInput.value + "          .....          " + userScore;
 
-        // Display stored scores
+        // Display initials and scores
         
         let allScores = JSON.parse(localStorage.getItem("scores")); 
+
+        // If the array is empty, the user's initials and score will be displayed.
+        // If the array has scores from local storage, then the user's initials and score are added to the existing array
 
         if(allScores == null){
           allScores = [userInfo];
         } else {
           allScores.push(userInfo);
         }
+
+        // User info is stored in a string, then parsed in the loop so that each high score is displayed on a new line
 
         localStorage.setItem("scores", JSON.stringify(allScores));
         displayAllScores();
@@ -317,8 +315,7 @@ function runGameOverScreen () {
                 p.textContent = score;
                 p.setAttribute("style", "font-size: 3rem; color: var(--blue); text-align: center; margin-top: 5%; margin-left: 3%; margin-right: 3%; margin-bottom: 3%;");
                 document.body.appendChild(p);
-              }
+            }
         }
     }
-
 }
