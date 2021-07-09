@@ -55,6 +55,7 @@ body {
 
 #start-button:hover {
     background-color: var(--green);
+    cursor: pointer;
 }
 
 /* Timer */
@@ -106,6 +107,7 @@ body {
 
 .options:hover {
     background-color: var(--green);
+    cursor: pointer;
 }
 
 /* Responsive design */
